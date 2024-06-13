@@ -15,12 +15,18 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("The method can take 1 or 2 comma-separated numbers, and will return their sum.")
     void StringCalculatorAddWillReturnSumOfArgs() {
-        Assertions.assertEquals(11+5+7, stringCalculator.add("11,5,7"));
-        Assertions.assertEquals(0, stringCalculator.add(""));
+        Assertions.assertEquals(11 + 5 + 7, stringCalculator.add("11,5,7"));
     }
+
     @Test
     @DisplayName("The method returns 0 when passed the empty string.")
     void StringCalculatorAddWillReturn0ifArgIsEmpty() {
         Assertions.assertEquals(0, stringCalculator.add(""));
+    }
+
+    @Test
+    @DisplayName("Allow the Add method to handle an unknown amount of numbers.")
+    void StringCalculatorAddWillReturnSumOfUnknownAmountOfNumbersArgs() {
+        Assertions.assertEquals(1+2+3+4+5+6, stringCalculator.add("1,2,3,4,5,6"));
     }
 }
