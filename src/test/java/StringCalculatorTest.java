@@ -39,12 +39,53 @@ public class StringCalculatorTest {
     /***
      * Optionally support custom separators.
      * To change separator,the beginning of the string will contain a separate line
-     * that looks like this: “//<separator>\n<numbers>”
      */
-
     @Test
     @DisplayName("Optionally support custom separators.")
     void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveAnyCustomSeparators() {
         Assertions.assertEquals(1 + 2 + 3 + 4 + 5 + 6, stringCalculator.add("1,\n@#;//2,!@#$/3;4@@\n5,6"));
+    }
+
+    @Test
+    @DisplayName("Calling Add with a negative number will throw an exception negatives not allowed, and the negative that was passed.")
+    void StringCalculatorAddWillThrowException() {
+
+        IllegalArgumentException exception1 = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.add("-2,1,2,3,4");
+        });
+        Assertions.assertEquals("negatives not allowed", exception1.getMessage());
+    }
+    @Test
+    @DisplayName("Calling Add with a negative number will throw an exception negatives not allowed, and the negative that was passed.")
+    void StringCalculatorAddWillThrowExceptionAndShowTheWrongNumbersIfArgsHasNegativeAnyNumber() {
+
+        IllegalArgumentException exception2 = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.add("-5,-3,-2,1,2,3,4");
+        });
+        Assertions.assertEquals("negatives not allowed : -5 -3 -2", exception2.getMessage());
+    }
+
+    @Test
+    @DisplayName("Ignore numbers bigger than 1000.")
+    void StringCalculatorAddWillReturnSumOfStringArgAfterIgnoreAnyBiggerThan1000Number() {
+        Assertions.assertEquals(13 + 55 + 450, stringCalculator.add("13,55,450,1001"));
+    }
+
+    @Test
+    @DisplayName("Separators can be of any length if surrounded by square brackets.")
+    void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveAnySurroundedBySquareBrackets() {
+        Assertions.assertEquals(1 + 2 + 3, stringCalculator.add("//[***]\\n1***2***3"));
+    }
+
+    @Test
+    @DisplayName("Allow multiple single-character separators.")
+    void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveAnyMultipleSingleCharacterSeparators() {
+        Assertions.assertEquals(1 + 2 + 3, stringCalculator.add("//[*][%]\\n1*2%3"));
+    }
+
+    @Test
+    @DisplayName("Handle multiple separators with any character length.")
+    void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveAnyMultipleSeparatorsWithAnyCharacterLength() {
+        Assertions.assertEquals(1 + 2 + 3, stringCalculator.add("//[foo][bar]\\n1foo2bar3"));
     }
 }
