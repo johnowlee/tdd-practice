@@ -35,4 +35,16 @@ public class StringCalculatorTest {
     void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveNewLineSeparatorIfResist() {
         Assertions.assertEquals(1 + 2 + 3 + 4 + 5 + 6, stringCalculator.add("1,\n2,3,4,\n5,6"));
     }
+
+    /***
+     * Optionally support custom separators.
+     * To change separator,the beginning of the string will contain a separate line
+     * that looks like this: “//<separator>\n<numbers>”
+     */
+
+    @Test
+    @DisplayName("Optionally support custom separators.")
+    void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveAnyCustomSeparators() {
+        Assertions.assertEquals(1 + 2 + 3 + 4 + 5 + 6, stringCalculator.add("1,\n@#;//2,!@#$/3;4@@\n5,6"));
+    }
 }
