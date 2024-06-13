@@ -3,10 +3,11 @@ public class StringCalculator {
         if (str.length() == 0) {
             return 0;
         }
-        String[] splitStrArr = str.split(",");
+        String strRemovedNewLineSeparator = str.replaceAll("\n", "");
+        String[] strArrSplitByComma = strRemovedNewLineSeparator.split(",");
 
         int sum = 0;
-        for (String s : splitStrArr) {
+        for (String s : strArrSplitByComma) {
             sum += Integer.parseInt(s);
         }
         return sum;

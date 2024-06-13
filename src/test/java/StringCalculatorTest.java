@@ -27,6 +27,12 @@ public class StringCalculatorTest {
     @Test
     @DisplayName("Allow the Add method to handle an unknown amount of numbers.")
     void StringCalculatorAddWillReturnSumOfUnknownAmountOfNumbersArgs() {
-        Assertions.assertEquals(1+2+3+4+5+6, stringCalculator.add("1,2,3,4,5,6"));
+        Assertions.assertEquals(1 + 2 + 3 + 4 + 5 + 6, stringCalculator.add("1,2,3,4,5,6"));
+    }
+
+    @Test
+    @DisplayName("Allow the Add method to recognise newlines as well as commas as separators. The two separator types can be used interchangeably.")
+    void StringCalculatorAddWillReturnSumOfStringArgAfterRemoveNewLineSeparatorIfResist() {
+        Assertions.assertEquals(1 + 2 + 3 + 4 + 5 + 6, stringCalculator.add("1,\n2,3,4,\n5,6"));
     }
 }
