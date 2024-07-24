@@ -1,3 +1,0 @@
-[submodule "leap-year"]
-	path = leap-year
-	url = https://github.com/johnowlee/tdd-leap-year.git
